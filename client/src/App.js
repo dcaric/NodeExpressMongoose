@@ -3,17 +3,26 @@ import axios from 'axios';
 
 const App = () => {
 
-  useEffect(()=>{
+  const addUser = () => {
     axios.get('/api/users')
     .then(response =>{
       console.log(response.data)
+    }).catch((err)=>{
+      console.log(err)
     })
-  },[])
+  }
+
 
   return(
-    <>
-      <h1>App</h1>
-    </>
+    <div className='app'>
+      
+      <button
+        onClick={()=>addUser()}
+      >
+        Add user
+      </button>
+
+    </div>
   )
 }
 
