@@ -24,12 +24,9 @@ const Car = mongoose.model('Car',carSchema)
 
 
 app.get('/api/getcars',(req,res)=>{
-    Car.findById('627593090f7e1e898775c9f4',(err,doc)=>{
+    Car.find({},(err,doc)=>{
         if(err) return console.log(err);
-        res.json([doc])
-
-        /// {}
-
+        res.json(doc)
     })
 })
 
@@ -45,6 +42,15 @@ app.post('/api/addcar',(req,res)=>{
     addCar.save((err,doc)=>{
         if(err) return console.log(err)
         res.sendStatus(200)
+    })
+})
+
+
+app.post('/api/removecar',(req,res)=>{
+    const brand = req.body.brand;
+    Car.remove({},(err,doc)=>{
+        if(err) return console.log(err)
+        res.json(doc)
     })
 })
 

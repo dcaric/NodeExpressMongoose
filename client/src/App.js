@@ -6,18 +6,22 @@ const App = () => {
   let [cars,setCars] = useState([]);
 
   useEffect(()=>{
+    getCars();
+  },[])
+
+  const getCars = () =>{
     axios.get('/api/getcars')
     .then( response =>{
       setCars(response.data)
     })
-  },[])
+  }
 
 
 
   const onCarSubmit = () => {
     axios.post('/api/addcar',{
-      brand: 'Porche',
-      model: '911',
+      brand: 'Ford',
+      model: 'Minion',
       year: 2022,
       avail: true
     })
@@ -26,6 +30,15 @@ const App = () => {
     })
   }
 
+  const onCarRemove = () =>{
+    axios.post('/api/removecar',{
+      brand:'Ford'
+    })
+    .then( response =>{
+      console.log(response.data)
+      getCars();
+    })
+  }
 
 
   return(
@@ -43,6 +56,9 @@ const App = () => {
         </div>
       ))
       }
+      <hr/>
+      <h2>Remove element/s</h2>
+      <button onClick={()=> onCarRemove()}>Delete it !!</button>
 
     </div>
   )
