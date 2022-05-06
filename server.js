@@ -23,6 +23,17 @@ const Car = mongoose.model('Car',carSchema)
 //////////////////////////
 
 
+app.get('/api/getcars',(req,res)=>{
+    Car.findById('627593090f7e1e898775c9f4',(err,doc)=>{
+        if(err) return console.log(err);
+        res.json([doc])
+
+        /// {}
+
+    })
+})
+
+
 app.post('/api/addcar',(req,res)=>{
     const addCar = new Car({
         brand: req.body.brand,
