@@ -20,9 +20,9 @@ const App = () => {
 
   const onCarSubmit = () => {
     axios.post('/api/addcar',{
-      brand: 'Ford',
-      model: 'Minion',
-      year: 2022,
+      brand: 'Porsche',
+      model: '911',
+      year: 2000,
       avail: true
     })
     .then(response =>{
@@ -39,6 +39,18 @@ const App = () => {
       getCars();
     })
   }
+
+  const onCarUpdate = () => {
+    axios.post('/api/updatecar',{
+      id:'62759e87fbef5b756e6e8b0c',
+      brand:'Porschexxx'
+    })
+    .then( response => {
+      console.log(response.data)
+      getCars();
+    })
+  }
+
 
 
   return(
@@ -57,9 +69,11 @@ const App = () => {
       ))
       }
       <hr/>
-      <h2>Remove element/s</h2>
-      <button onClick={()=> onCarRemove()}>Delete it !!</button>
-
+        <h2>Remove element/s</h2>
+        <button onClick={()=> onCarRemove()}>Delete it !!</button>
+      <hr/>
+        <h2>Update element</h2>
+        <button onClick={()=> onCarUpdate()}>Update it !!</button>
     </div>
   )
 }

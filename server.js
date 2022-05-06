@@ -55,6 +55,39 @@ app.post('/api/removecar',(req,res)=>{
 })
 
 
+app.post('/api/updatecar',(req,res)=>{
+    const id = req.body.id;
+    const brand = req.body.brand;
+
+    Car.findById(id,(err,car)=>{
+        if(err) return console.log(err)
+        car.set({
+            brand:brand
+        })
+
+        car.save((err,doc)=>{
+            if(err) return console.log(err)
+            res.json(doc)
+        })
+    })
+})
+
+
+// app.post('/api/updatecar',(req,res)=>{
+//     const id = req.body.id;
+//     const brand = req.body.brand;
+
+//     Car.findByIdAndUpdate(id,{
+//         $set:{ brand: brand }
+//     },{
+//         new:true
+//     },(err,doc)=>{
+//         if(err) return console.log(err)
+//         res.json(doc)
+//     })
+// })
+
+
 
 const port = process.env.POST || 3001;
 app.listen(port);
